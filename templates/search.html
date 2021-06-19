@@ -1,0 +1,89 @@
+{% extends "menu_bar.html" %}
+{% block body %}
+    <title>SEARCH</title>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+<script type=text/javascript>
+  $(function() {
+    $('a#Pingsearch').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/search', {
+        a: $('select[name="a"]').val(),
+           }, function(data) {
+<!--        $("#result").text(data.sear);-->
+
+        var res = data.sear;
+        var arr = res.split("/")
+        document.getElementById("result").value = arr[0];
+        document.getElementById("result1").value = arr[1];
+
+
+      });
+      return false;
+    });
+  });
+</script>
+
+
+<h1 align="center" class="head">Search Network IP's</h1>
+ 
+<form>
+  <div style="margin:50px">
+        <div class="head">
+          <p align="center"> <label for='a' >Enter IP Address's Below:</label></p>
+        </div>
+
+<!--        <div class="head" align="center" >-->
+<!--        <textarea type=text name=a placeholder="enter IP"></textarea> &nbsp;&nbsp;&nbsp; -->
+<!--        <a href="/searc" type=submit class="btn btn-primary" id=Pingsearch>Ping</a> &nbsp;&nbsp;&nbsp;-->
+<!--            <textarea type=text name=result id= result1 placeholder="get result"></textarea>-->
+<!--        </div>-->
+
+        <div align="center">
+            <select name="a" style="width:250px">
+                <option value="192.168.10.3">Geography 192.168.10.3</option>
+                <option value="192.168.10.3">Geography 192.168.10.3</option>
+                <option value="192.168.10.6">Humanities 192.168.10.6</option>
+                <option value="172.16.99.60">Ladies_hostel 172.16.99.60</option>
+                <option value="192.168.10.16">Ladie_Hostel 192.168.10.16</option>
+                <option value="192.168.10.18">New_Ladies_hostel 192.168.10.18</option>
+                <option value="172.16.99.64">CWS 172.16.99.64</option>
+                <option value="192.168.10.20">CWS2 192.168.10.20</option>
+                <option value="172.16.99.65">CCS 172.16.99.65</option>
+                <option value="192.168.10.21">CCS2 192.168.10.21</option>
+                <option value="192.168.10.22">NEW_Guest_House 192.168.10.22</option>
+                <option value="192.168.10.24">registrar  192.168.10.24</option>
+                <option value="192.168.10.25">VC_BDG 192.168.10.25</option>
+                <option value="192.168.10.26">VIP_BDG 192.168.10.26</option>
+                <option value="192.168.10.27">Distance 192.168.10.27</option>
+                <option value="192.168.10.31">Sport_BDG 192.168.10.31</option>
+                <option value="192.168.10.29">Music 192.168.10.29</option>
+                <option value="192.168.10.32">Health_centre 192.168.10.32</option>
+                <option value="192.168.10.33">Vidhyarthi_Bhavan 192.168.10.33</option>
+                <option value="192.168.10.34">Plain_BDg 192.168.10.34</option>
+                <option value="192.168.10.35">mens_hostel1 192.168.10.35</option>
+                <option value="192.168.10.36">Mens_hostel2 192.168.10.36</option>
+                <option value="192.168.10.37">press 192.168.10.37</option>
+                <option value="192.168.10.38">law 192.168.10.38</option>
+
+            </select>&nbsp;&nbsp;&nbsp;
+         <a href="/searc" type=submit class="btn btn-primary" id=Pingsearch>Ping</a> &nbsp;&nbsp;&nbsp;
+            <input type="text" style="width:250px" name=result id=result placeholder="get result">
+        </div>
+
+  </div>
+    <div class="res1" align="center">
+<!--          <output name="x" id="result1" style="width: 50% "></output>-->
+<!--    <p type=text name=result id= result1 style="width: 500px; height: 200px; "></p>-->
+<!--        <input type="text" style="width:500px; height:500px; rows:5;" name=result1 id=result1>-->
+
+      </div>
+</form>
+{% endblock %}

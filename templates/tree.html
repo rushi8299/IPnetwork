@@ -1,0 +1,279 @@
+{% extends "menu_bar.html" %}
+{% block body %}
+    <title>MAP</title>
+    
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+
+<script type=text/javascript>
+  $(function() {
+    $('a#mapbutton').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/map', {
+        a: $('td[name="a"]').val(),
+           }, function(data) {
+
+            var str=data.mapinfo;
+            var arr=str.split("/")
+            var alen=arr.length;
+
+
+<!--Actual Code Starts-->
+            var table=document.getElementById("MainTable1");
+            var table2=document.getElementById("MainTable2");
+            var x=0;
+            var main_active=[];
+            var lib_active=[];
+            var exam_active=[];
+            var main_inactive=[];
+            var mainlen=main_active.length;
+
+
+            for(var i=1;i<alen;i++)
+            {
+                var temp=arr[x];
+                var rows=temp.split(" ");
+
+
+                if (rows[2]=="Active" && rows[3]=="main") {
+                    main_active.push(rows[0]);
+                } else if (rows[2]=="Inactive" && rows[3]=="main") {
+<!--                main_inactive.push(rows[0]);-->
+                }
+
+
+                if (rows[2]=="Active" && rows[3]=="lib") {
+                    lib_active.push(rows[0]);
+                } else if (rows[2]=="Inactive" && rows[3]=="lib") {
+<!--                    lib_inactive.push(rows[0]);-->
+                }
+
+                if (rows[2]=="Active" && rows[3]=="exam") {
+                    exam_active.push(rows[0]);
+                } else if (rows[2]=="Inactive" && rows[3]=="exam"){
+<!--                    exam_inactive.push(rows[0]);-->
+                }
+                var x=x+1;
+            }
+
+
+<!--****************************Active*************************************-->
+            var s=0;
+            var mcount=exam_active.length;
+            for(var i=1;i<mcount;i++)
+            {
+
+                var row=table.insertRow(-1);
+                var cell1=row.insertCell(0);
+                var cell2=row.insertCell(1);
+                var cell3=row.insertCell(2);
+
+
+                 cell1.innerHTML=main_active[s].fontcolor("green").bold();
+
+                 cell2.innerHTML=lib_active[s].fontcolor("green").bold();
+                 cell3.innerHTML=exam_active[s].fontcolor("green").bold();
+                var s=s+1;
+            }
+
+      });
+      return false;
+    });
+  });
+</script>
+
+
+
+<!--****************************Script for Inactive*************************************-->
+
+<!--<script type=text/javascript>-->
+<!--  $(function() {-->
+<!--    $('a#mapbutton').bind('click', function() {-->
+<!--      $.getJSON($SCRIPT_ROOT + '/map', {-->
+<!--        a: $('td[name="a"]').val(),-->
+<!--           }, function(data) {-->
+
+<!--            var str=data.mapinfo;-->
+<!--            var arr=str.split("/")-->
+<!--            var alen=arr.length;-->
+
+
+<!--&lt;!&ndash;Actual Code Starts&ndash;&gt;-->
+<!--            var table=document.getElementById("MainTable");-->
+<!--            var table2=document.getElementById("MainTable2");-->
+<!--            var x=0;-->
+<!--            var main_active=[];-->
+<!--            var main_inactive=[];-->
+<!--            var lib_inactive=[];-->
+<!--            var exam_inactive=[];-->
+<!--            var mainlen=main_active.length;-->
+
+
+<!--            for(var i=1;i<alen;i++)-->
+<!--            {-->
+<!--                var temp=arr[x];-->
+<!--                var rows=temp.split(" ");-->
+
+
+
+
+<!--                if (rows[2]=="Active" && rows[3]=="main") {-->
+<!--                } else if (rows[2]=="Inactive" && rows[3]=="main") {-->
+<!--                main_inactive.push(rows[0]);-->
+<!--                }-->
+
+
+<!--                if (rows[2]=="Active" && rows[3]=="lib") {-->
+<!--                } else if (rows[2]=="Inactive" && rows[3]=="lib") {-->
+<!--                lib_inactive.push(rows[0]);-->
+<!--                }-->
+
+<!--                if (rows[2]=="Active" && rows[3]=="exam") {-->
+<!--                } else if (rows[2]=="Inactive" && rows[3]=="exam"){-->
+<!--                exam_inactive.push(rows[0]);-->
+<!--                }-->
+<!--                var x=x+1;-->
+<!--            }-->
+
+<!--            var ins=0;-->
+<!--            for(var j=1;j<alen;j++)-->
+<!--            {-->
+
+<!--                var row1=table2.insertRow(-1);-->
+<!--                var cell11=row1.insertCell(0);-->
+<!--                var cell22=row1.insertCell(1);-->
+<!--                var cell33=row1.insertCell(2);-->
+
+<!--                 cell11.innerHTML=main_inactive[ins].fontcolor("red").bold();-->
+<!--                 cell22.innerHTML=lib_inactive[ins].fontcolor("red").bold();-->
+<!--                 cell33.innerHTML=exam_inactive[ins].fontcolor("red").bold();-->
+<!--                 ins++;-->
+<!--            }-->
+<!--      });-->
+<!--      return false;-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>-->
+<!--<script type="text/javascript">-->
+<!--        $("body").on("click", "#btnExport", function () {-->
+<!--            html2canvas($('#mappdf')[0], {-->
+<!--                onrendered: function (canvas) {-->
+<!--                    var data = canvas.toDataURL();-->
+<!--                    var docDefinition = {-->
+<!--                        content: [{-->
+<!--                            image: data,-->
+<!--                            width: 500-->
+<!--                        }]-->
+<!--                    };-->
+<!--                    pdfMake.createPdf(docDefinition).download("Map.pdf");-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--</script>-->
+
+<!--<script type=text/javascript>-->
+<!--  $(function() {-->
+<!--    $('a#mapbutton').bind('click', function() {-->
+<!--      $.getJSON($SCRIPT_ROOT + '/data_center', {-->
+<!--        a: $('td[name="a"]').val(),-->
+<!--           }, function(data) {-->
+
+<!--            var str=data.centerdata;-->
+<!--            var dtc=[];-->
+<!--            var dtci=[];-->
+<!--            var arr=str.split("/")-->
+<!--            var alen=arr.length;-->
+<!--            var temp=arr[0];-->
+<!--            var rows=temp.split(" ");-->
+<!--            var table3=document.getElementById("datacen");-->
+
+
+
+<!--            if (rows[1]=="Active") {-->
+<!--            dtca.push("Data Center");-->
+<!--            } else {-->
+<!--            dtci.push("Data Center");-->
+<!--            }-->
+
+<!--            var row11=table3.insertRow(-1);-->
+<!--            var cell111=row11.insertCell(0);-->
+
+<!--            cell111.innerHTML=dtc[0].fontcolor("red").bold();-->
+
+
+
+<!--            });-->
+<!--      return false;-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+
+<!--Actual Code Ends-->
+
+<form>
+
+    <div align="right" style="width: 97%; ">
+        <a href="#"><img src="{{ url_for('static', filename='img/pdficon.jpg') }}" width="40" height="40" id="btnExport" ></a>
+    </div>
+
+    <div class="head" align="center" style="color:Black;">
+    <h1>Campus Network Map</h1>
+    </div>
+
+    <div align="center" style=" margin-bottom: 25px; ">
+<!--      <div align="center">-->
+       <a href=# type=submit id=mapbutton style=""><button  class="btn">Click Here</button></a>
+    </div>
+
+
+    <!--<p> <label for='a' > Enter IP Address's Below:</label></p>-->
+       <!-- <div class="col-lg-8 col-md-10 mx-auto">
+      <labe Get result:</label><br> -->
+
+        <!-- <textarea type=text name=a placeholder="enter IP"></textarea> =-->
+
+        <!-- <textarea type=text  name=result class="form-control" id= result placeholder="get result"></textarea> -->
+
+<!--<div align="center">-->
+<!--     <table width="50%" id="datacen" style="text-align-center;">-->
+
+<!--     </table>-->
+<!--  </div>-->
+
+  <div id="mappdf">
+    <div align="center">
+       <table width="60%" align="center" id="MainTable1" style="text-align:center;">
+        <tr>
+               <th style="text-align:center; border: 0px">  </th>
+               <th style="text-align:center; border: 0px">  </th>
+               <th style="text-align:center; border: 0px"> </th>
+        </tr>
+
+       </table>
+  </div>
+  <div align="center">
+       <table width="60%" align="center" id="MainTable2" style="text-align:center;">
+            <tr>
+               <th style="text-align:center; border: 0px">  </th>
+               <th style="text-align:center; border: 0px">  </th>
+               <th style="text-align:center; border: 0px"> </th>
+        </tr>
+
+       </table>
+  </div>
+  </div>
+</form>
+
+{% endblock %}
+

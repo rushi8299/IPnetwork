@@ -1,0 +1,135 @@
+{% extends "menu_bar.html" %}
+{% block body %}
+    <title>PING SOUTH SIDE</title>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+
+<script type=text/javascript>
+  $(function() {
+    $('a#Pingsouth').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/_ping_south', {
+        a: $('td[name="a"]').val(),
+           }, function(data) {
+
+            var str=data.deptinfo;
+            var arr=str.split("/")
+            var alen=arr.length;
+
+
+<!--Actual Code Starts-->
+            var table=document.getElementById("MainTable");
+            var x=0;
+            for(var i=1;i<alen;i++)
+            {
+                var temp=arr[x];
+                var rows=temp.split(" ");
+
+                var row=table.insertRow(-1);
+                var cell1=row.insertCell(0);
+                var cell2=row.insertCell(1);
+                var cell3=row.insertCell(2);
+
+                if (rows[2]=="Active") {
+                    cell1.innerHTML=rows[0].fontcolor("green").bold();
+                    cell2.innerHTML=rows[1].fontcolor("green").bold();
+                    cell3.innerHTML=rows[2].fontcolor("green").bold();
+                } else if (rows[2]=="Destination_net_unreachable") {
+                    cell1.innerHTML=rows[0].fontcolor("yellow").bold();
+                    cell2.innerHTML=rows[1].fontcolor("yellow").bold();
+                    cell3.innerHTML=rows[2].fontcolor("yellow").bold();
+                } else {
+                    cell1.innerHTML=rows[0].fontcolor("red").bold();
+                    cell2.innerHTML=rows[1].fontcolor("red").bold();
+                    cell3.innerHTML=rows[2].fontcolor("red").bold();
+                }
+
+
+                var x=x+1;
+
+
+            }
+      });
+      return false;
+    });
+  });
+</script>
+<!--Actual Code Ends-->
+
+<form>
+
+     <div align="right" style="width: 97%; ">
+        <a href="#"><img src="{{ url_for('static', filename='img/pdficon.jpg') }}" width="40" height="40" id="btnExport" ></a>
+    </div>
+
+    <div class="head" align="center" style="color:Black;">
+    <h1>Check South Side Network Status</h1>
+    </div>
+
+    <div align="center" style=" margin-bottom: 25px; ">
+<!--      <div align="center">-->
+       <a href=# type=submit id=Pingsouth style=""><button  class="btn">Click Here</button></a>
+    </div>
+
+
+    <!--<p> <label for='a' > Enter IP Address's Below:</label></p>-->
+       <!-- <div class="col-lg-8 col-md-10 mx-auto">
+      <labe Get result:</label><br> -->
+
+        <!-- <textarea type=text name=a placeholder="enter IP"></textarea> =-->
+
+        <!-- <textarea type=text  name=result class="form-control" id= result placeholder="get result"></textarea> -->
+
+
+<!--       </div>-->
+  <div align="center">
+       <table border="1" width="60%" align="center" id="MainTable" style="text-align:center">
+             <tr>
+               <th style="text-align:center"> Department Name</th>
+               <th style="text-align:center"> IP Address</th>
+               <th style="text-align:center"> Status</th>
+             </tr>
+       </table>
+      </div>
+<br>
+<br>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+
+
+<script type="text/javascript">
+        $("body").on("click", "#btnExport", function () {
+            html2canvas($('#MainTable')[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("South Side Report.pdf");
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+</form>
+
+{% endblock %}

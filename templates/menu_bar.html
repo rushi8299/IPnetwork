@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
+  display: block;
+  transition: 0.2s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}    
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+  
+
+}
+.btn {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 17px;
+  padding: 9px 17px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #097DBB;
+  text-decoration: none;
+}
+
+<!--********** Start Maintable code ************-->
+
+#MainTable {
+
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+}
+
+#MainTable td, #MainTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+
+#MainTable tr:hover {background-color: #ddd;}
+
+#MainTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CB9F3;
+  color: white;
+  width: 20%;
+
+}
+
+<!--********** End Maintable code ************-->
+
+
+
+<!--********** start Maintable1 code ************-->
+
+#MainTable1 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+}
+#MainTable1 td, #MainTable1 th {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+#MainTable1 tr:hover {background-color: #ddd;}
+
+#MainTable1 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: white;
+  color: white;
+  width: 20%;
+<!--  border: 1px solid black;-->
+
+}
+
+<!--********** End Maintable1 code ************-->
+
+
+
+
+
+<!--********** Start Maintable2 code ************-->
+
+#MainTable2 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+}
+#MainTable2 td, #MainTable2 th {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+#MainTable2 tr:hover {background-color: #ddd;}
+
+#MainTable2 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: white;
+  color: white;
+  width: 20%;
+}
+<!--********** End Maintable2 code ************-->
+
+#contentt {
+  /*padding: 20px;*/
+  transition: margin-left 0.7s;
+  overflow: hidden;
+  /*width: 100%;*/
+}
+
+.head {
+  width: 100%;
+  height: 100%;
+  align: center;
+  font-family: "Times New Roman", Times, serif;
+
+}
+
+#result1::after {
+   'data: <br/>';
+}
+
+</style>
+
+<script>
+  function openNav(){
+    document.getElementById('menu').style.width = '250px';
+    document.getElementById('contentt').style.marginLeft = '250px';
+  }
+  function closeNav(){
+    document.getElementById('menu').style.width = '0';
+    document.getElementById('contentt').style.marginLeft = '0';
+  }
+</script>
+
+</head>
+<!-- <script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+</head>
+<body>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&nbsp; &#9776;</span>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href='/' type=submit >Home</a> <br>
+         <a href='/pingnorth' type=submit id=Ping>North Side</a> <br>
+         <a href='/pingsouth' type=submit id=Pingsout>South Side</a><br>
+         <a href="/mapp" type=submit id=map>Map</a><br>
+         <a href="/searc" type=submit id=search>Search</a>
+</div> -->
+
+<span style="font-size:30px;cursor:pointer;color:black;" onclick="openNav()">&nbsp; &#9776;</span>
+
+  <div id="contentt" style="margin-left: 250px;transition: margin-left 0.4s;">
+
+    <div id="menu" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href='/' type=submit>Home</a> <br>
+         <a href='/pingnorth' type=submit id=Ping>North Side</a> <br>
+         <a href='/pingsouth' type=submit id=Pingsouth>South Side</a><br>
+         <a href="/mapp" type=submit id=map>Map</a><br>
+         <a href="/searc" type=submit id=search>Search</a><br>
+         <a href="/findmystatus" type=submit id=stats>My Status</a><br>
+    </div>
+    {% block body %} {% endblock %}
+</div>
+
+
+
+
+
+
+</body>
+</html>

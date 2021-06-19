@@ -1,0 +1,103 @@
+{% extends "menu_bar.html" %}
+{% block body %}
+
+<html>
+<head>
+  <style type="text/css">
+
+
+  </style>
+
+</head>
+    <title>MY STATUS</title>
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+<script type=text/javascript>
+  $(function() {
+    $('a#mystat').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/findstatus', {
+        a: $('td[name="a"]').val(),
+           }, function(data) {
+
+            var str=data.status;
+            var arr=str.split("/")
+            var alen=arr.length;
+
+        // $("#status").text(data.status);
+
+<!--Actual Code Starts-->
+            var table=document.getElementById("MainTable");
+            var x=0;
+            for(var i=1;i<alen;i++)
+            {
+                var temp=arr[x];
+                var rows=temp.split(" ");
+
+                var row=table.insertRow(-1);
+                var cell1=row.insertCell(0);
+                var cell2=row.insertCell(1);
+                var cell3=row.insertCell(2);
+
+                if (rows[2]=="Active") {
+                    cell1.innerHTML=rows[0].fontcolor("green").bold();
+                    cell2.innerHTML=rows[1].fontcolor("green").bold();
+                    cell3.innerHTML=rows[2].fontcolor("green").bold();
+                }
+                else {
+                    cell1.innerHTML=rows[0].fontcolor("red").bold();
+                    cell2.innerHTML=rows[1].fontcolor("red").bold();
+                    cell3.innerHTML=rows[2].fontcolor("red").bold();
+                }
+
+
+                var x=x+1;
+
+
+            }
+      });
+      return false;
+    });
+  });
+</script>
+<form>
+
+
+    <div class="head" align="center" style="color:Black;">
+    <h1>Network Status of My Device</h1>
+    </div>
+
+    <div align="center" style=" margin-bottom: 25px; ">
+<!--      <div align="center">-->
+       <a href=# type=submit id=mystat style=""><button  class="btn">Click Here</button></a>
+    </div>
+
+
+
+  <div align="center" >
+       <table border="1" width="60%" align="center" id="MainTable" style="text-align:center;" >
+             <tr>
+               <th style="text-align:center"> Device Name</th>
+               <th style="text-align:center"> IP Address</th>
+               <th style="text-align:center"> Status</th>
+             </tr>
+       </table >
+
+  </div>
+    <br>
+        <br>
+        <br>
+
+</form>
+</html>
+
+{% endblock %}

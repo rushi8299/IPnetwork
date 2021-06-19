@@ -1,0 +1,3 @@
+Geography 192.168.10.3
+Humanities 192.168.10.6
+Ladies_hostel 172.16.99.60
